@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papa Special Surprise</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:black;
+    overflow:hidden;
+}
+
+/* COMMON */
+.page{
+    position:absolute;
+    width:100%;
+    height:100vh;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
+    color:white;
+    padding:20px;
+}
+.page.active{display:flex}
+
+button{
+    margin-top:18px;
+    padding:14px 30px;
+    font-size:16px;
+    border:none;
+    border-radius:30px;
+    background:#ff9800;
+    color:white;
+    cursor:pointer;
+}
+
+/* ❤️ Floating hearts */
+.heart{
+    position:fixed;
+    bottom:-10px;
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+@keyframes float{
+    to{transform:translateY(-100vh);opacity:0}
+}
+
+/* ==================== PAGE 1 – HERO DESIGN ==================== */
+#page1{
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+}
+
+/* HERO PHOTOS */
+.hero-photos{
+    position:relative;
+    width:260px;
+    height:260px;
+    margin:20px 0;
+}
+.hero-photos img{
+    position:absolute;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid white;
+    animation:softZoom 4s ease-in-out infinite;
+}
+.hero-photos .big{
+    width:200px;
+    height:200px;
+    top:30px;
+    left:30px;
+}
+.hero-photos .small{
+    width:90px;
+    height:90px;
+}
+.hero-photos .left{top:0;left:0}
+.hero-photos .right{bottom:0;right:0}
+
+/* TEXT ANIMATION */
+#page1 h1, #page1 p{
+    animation:fadeUp 2s ease forwards;
+}
+
+@keyframes softZoom{
+    0%{transform:scale(0.95);opacity:0.8}
+    50%{transform:scale(1);opacity:1}
+    100%{transform:scale(0.95);opacity:0.8}
+}
+
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ==================== PAGE 2 – MEMORY CARDS ==================== */
+#page2{
+    background:linear-gradient(135deg,#2193b0,#6dd5ed);
+}
+.card{
+    background:white;
+    color:#333;
+    padding:20px;
+    border-radius:20px;
+    max-width:420px;
+    animation:cardEntry 1.2s ease forwards;
+}
+.memory-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin:15px 0;
+}
+.mem{
+    position:relative;
+}
+.mem img{
+    width:100%;
+    height: 110px;
+    border-radius:15px;
+}
+.mem span{
+    position:absolute;
+    bottom:6px;
+    left:6px;
+    right:6px;
+    background:rgba(0,0,0,0.6);
+    color:white;
+    font-size:12px;
+    padding:4px;
+    border-radius:8px;
+}
+
+/* MEMORY ANIMATIONS */
+.mem:nth-child(1){
+    animation:slideLeft 1.5s ease forwards;
+}
+.mem:nth-child(2){
+    animation:slideRight 1.5s ease forwards;
+}
+
+@keyframes cardEntry{
+    from{transform:scale(0.9);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+@keyframes slideLeft{
+    from{opacity:0;transform:translateX(-40px)}
+    to{opacity:1;transform:translateX(0)}
+}
+@keyframes slideRight{
+    from{opacity:0;transform:translateX(40px)}
+    to{opacity:1;transform:translateX(0)}
+}
+
+/* ==================== PAGE 3 – POLAROID + FIREWORKS ==================== */
+#page3{
+    background:black;
+}
+.polaroids{
+    display:flex;
+    gap:15px;
+    margin-top:20px;
+}
+.polaroid{
+    background:white;
+    padding:10px 10px 25px;
+    width:110px;
+    border-radius:8px;
+    text-align:center;
+    animation:partyFloat 2.5s ease-in-out infinite;
+}
+.polaroid img{
+    width:100%;
+    border-radius:5px;
+}
+.polaroid p{
+    color:#333;
+    font-size:12px;
+    margin-top:5px;
+}
+.rotate1{transform:rotate(-8deg)}
+.rotate2{transform:rotate(6deg)}
+.rotate3{transform:rotate(-4deg)}
+
+@keyframes partyFloat{
+    0%{transform:translateY(0) rotate(-5deg)}
+    50%{transform:translateY(-15px) rotate(5deg)}
+    100%{transform:translateY(0) rotate(-5deg)}
+}
+
+/* TEXT POP */
+#page3 h1, #page3 h2, #page3 p{
+    animation:popIn 1.5s ease forwards;
+}
+
+@keyframes popIn{
+    from{opacity:0;transform:scale(0.6)}
+    to{opacity:1;transform:scale(1)}
+}
+
+/* FIREWORKS */
+.firework{
+    position:absolute;
+    width:6px;
+    height:6px;
+    background:white;
+    animation:explode 1.5s infinite;
+}
+@keyframes explode{
+    from{transform:scale(0);opacity:1}
+    to{transform:scale(25);opacity:0}
+}
+.glow{
+    animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+    from{text-shadow:0 0 10px gold}
+    to{text-shadow:0 0 25px red}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio id="music1" loop>
+    <source src="happy-birthday-368842.mp3">
+</audio>
+<audio id="music2" loop>
+    <source src="holiday-new-year-347831.mp3">
+</audio>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+    <h1>🎂 Happy Birthday Papa 🎂</h1>
+
+    <div class="hero-photos">
+        <img src="IMG_20240519_004711.jpg" class="big">
+        <img src="Img papa.jpg.jpeg" class="small left">
+        <img src="IMG_20200928_163941.jpg" class="small right">
+    </div>
+
+    <p>
+        Papa, aap humare father hi nahi,<br>
+        humare hero, guide aur sabse badi strength ho ❤️
+    </p>
+
+    <button onclick="goToPage(2)">Papa ke liye aur wishes 🎁</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+    <div class="card">
+        <h2>Papa ❤️ Best Wishes</h2>
+
+        <p>
+            Aapki mehnat, discipline aur values<br>
+            humari zindagi ki sabse badi seekh hain 🙏
+        </p>
+
+        <div class="memory-grid">
+            <div class="mem">
+                <img src="IMG-20250205-WA0009.jpg">
+                <span>My family</span>
+            </div>
+            <div class="mem">
+                <img src="img_famly.jpg">
+                <span>Love & Blessings</span>
+            </div>
+        </div>
+
+        <p>
+            Bhagwan aapko lambi umar,<br>
+            achhi sehat aur hamesha khush rakhe 🌸
+        </p>
+
+        <button onclick="goToPage(3)">Final Surprise 🎆</button>
+    </div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+    <h1 class="glow">🎉 Happy Birthday Papa 🎉</h1>
+    <h2 class="glow">✨ Happy New Year 2025 ✨</h2>
+
+    <div class="polaroids">
+        <div class="polaroid rotate1">
+            <img src="IMG_20200928_170030.jpg">
+            <p>Papa ❤️</p>
+        </div>
+        <div class="polaroid rotate2">
+            <img src="IMG_20240519_004711.jpg">
+            <p>pic</p>
+        </div>
+        <div class="polaroid rotate3">
+            <img src="IMG-20241111-WA0013.jpg">
+            <p>Forever</p>
+        </div>
+    </div>
+
+    <p class="glow">
+        1 January – Double Celebration 🎊<br>
+        Naya sal aapke liye khushiyon se bhara ho ❤️
+    </p>
+</div>
+
+<script>
+function goToPage(n){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById("page"+n).classList.add("active");
+
+    if(n===2){
+        document.getElementById("music1").play();
+    }
+    if(n===3){
+        document.getElementById("music1").pause();
+        document.getElementById("music2").play();
+    }
+}
+
+/* Hearts */
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},600);
+
+/* Fireworks */
+setInterval(()=>{
+    let f=document.createElement("div");
+    f.className="firework";
+    f.style.left=Math.random()*100+"vw";
+    f.style.top=Math.random()*100+"vh";
+    document.getElementById("page3").appendChild(f);
+    setTimeout(()=>f.remove(),1500);
+},400);
+</script>
+
+</body>
+</html>
